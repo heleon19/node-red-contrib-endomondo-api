@@ -7,7 +7,7 @@ module.exports = function(RED) {
         node.on('input', function(msg) {
             /* connect to endomondo */
             const auth = await authenticate({email: node.user, password: node.password});
-            console.log(auth);
+            //console.log(auth);
             msg.payload = auth;
             node.send(msg);
         });
