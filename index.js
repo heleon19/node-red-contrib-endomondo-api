@@ -43,6 +43,7 @@ module.exports = function(RED) {
                 msg.data.workout = _workout;
 
                 /* use format of official msg convention */
+                msg.payload = {};
                 msg.payload.id = _workout.id;                             // The ID of the activity in the given fitness system/API
                 msg.payload.type = _workout.sport;                        // The type of the activity, example: run/cycle ride
                 msg.payload.duration = _workout.duration;                 // Duration of the activity in seconds
