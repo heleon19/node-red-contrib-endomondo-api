@@ -1,0 +1,27 @@
+{
+  "name": "node-red-contrib-endomondo-api",
+  "version": "0.0.1",
+  "description": "A Node-RED node that gets workouts from Endomondo.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heleon19/node-red-contrib-endomondo-api.git"
+  },
+  "keywords": [
+    "node-red",
+    "endomondo",
+    "sport"
+  ],
+  "author": "Reto Jenni",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/heleon19/node-red-contrib-endomondo-api/issues"
+  },
+  "homepage": "https://github.com/heleon19/node-red-contrib-endomondo-api#readme",
+  "dependencies": {
+    "endomondo-unofficial-api": "0.0.9"
+  }
+}
