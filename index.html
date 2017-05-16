@@ -1,20 +1,31 @@
 <script type="text/javascript">
     RED.nodes.registerType('Workouts',{
         category: 'function',
-        color: '#a6bbcf',
+        color: '#00ff00',
         defaults: {
-            name: {value:""}
+            name: {value:""},
+            user: {value:"your@mail.com"},
+            password: {value:""}
         },
-        inputs:1,
+        inputs:2,
         outputs:1,
-        icon: "file.png",
+        icon: "white-globe.png",
         label: function() {
-            return this.name||"Workouts";
+            return this.name || "Workouts";
         }
     });
 </script>
 
 <script type="text/x-red" data-template-name="Workouts">
+    <div class="form-row">
+        <label for="node-input-user"><i class="icon-tag"></i> User</label>
+        <input type="text" id="node-input-user">
+    </div>
+    <div class="form-row">
+        <label for="node-input-password"><i class="icon-tag"></i> Password</label>
+        <input type="password" id="node-input-password">
+    </div>
+
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -22,32 +33,5 @@
 </script>
 
 <script type="text/x-red" data-help-name="Workouts">
-    <p>A simple node that converts the message payloads into all lower-case characters</p>
-</script>
-
-<script type="text/javascript">
-    RED.nodes.registerType('Workouts2',{
-        category: 'function',
-        color: '#a6bbcf',
-        defaults: {
-            name: {value:""}
-        },
-        inputs:1,
-        outputs:1,
-        icon: "file.png",
-        label: function() {
-            return this.name||"workouts2";
-        }
-    });
-</script>
-
-<script type="text/x-red" data-template-name="Workouts2">
-    <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
-    </div>
-</script>
-
-<script type="text/x-red" data-help-name="Workouts2">
-    <p>A simple node that converts the message sssss aracters</p>
+    <p>A node to get workouts from <a href="http://www.endomondo.com">Endomondo</a></p>
 </script>

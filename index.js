@@ -1,22 +1,14 @@
 module.exports = function(RED) {
-    function LowerCaseNode(config) {
-        RED.nodes.createNode(this,config);
+    function Workouts(config) {
+        RED.nodes.createNode(this, config);
+        this.user = config.user;
+        this.password = config.password;
         var node = this;
         node.on('input', function(msg) {
-            msg.payload = msg.payload.toLowerCase();
+            msg.payload = node.user + " " + node.password + " " + msg.payload.toLowerCase();
             node.send(msg);
         });
     }
 
-    function LowerCaseNode2(config) {
-        RED.nodes.createNode(this,config);
-        var node = this;
-        node.on('input', function(msg) {
-            msg.payload = msg.payload.toLowerCase();
-            node.send(msg);
-        });
-    }
-
-    RED.nodes.registerType("Workouts",LowerCaseNode);
-    RED.nodes.registerType("Workouts2",LowerCaseNode2);
+    RED.nodes.registerType("Workouts", Workouts);
 }
