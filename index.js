@@ -63,7 +63,7 @@ module.exports = function(RED) {
 
     }
 
-    RED.nodes.registerType("Workouts", WorkoutsNode);
+    RED.nodes.registerType("GetWorkout", WorkoutsNode);
 }
 
 
