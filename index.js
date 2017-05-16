@@ -32,7 +32,11 @@ module.exports = function(RED) {
                 return result
             })
             .then((result) => {
-                return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[node.index].id})
+                if(_workouts.data.length > node.index) {
+                    return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[node.index].id})
+                } else {
+                    return null;
+                }
             })
             .then((result) => {
                 _workout = result;
