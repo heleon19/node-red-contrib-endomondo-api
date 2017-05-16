@@ -21,7 +21,7 @@ module.exports = function(RED) {
             const _catch((err) => {
               msg.err = err;
               node.send(msg);
-            })
+            });
 
             authenticate({email: node.user, password: node.password})
             .then((result) => {
@@ -31,21 +31,22 @@ module.exports = function(RED) {
             })
             .then((result) => {
                 return workouts({authToken: _auth.authToken});
-            }, (err) => _catch(err))
+            })
             .then((result) => {
                 _workouts = result;
                 msg.workouts = _workouts;
                 return result
-            }, (err) => _catch(err))
+            })
             .then((result) => {
                 return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[node.index].id})
-            }, (err) => _catch(err))
+            })
             .then((result) => {
                 _workout = result;
                 msg.payload = _workout;
                 node.send(msg);
                 return result
-            });
+            })
+            .catch((cause) => _catch(cause));
         });
     }
 
