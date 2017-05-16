@@ -45,7 +45,8 @@ module.exports = function(RED) {
                 msg.payload = _workout;
                 node.send(msg);
                 return result;
-            });
+            })
+            .catch((cause) => _catch(cause));
         });
     }
 
