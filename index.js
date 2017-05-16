@@ -15,6 +15,7 @@ module.exports = function(RED) {
             /* connect to endomondo */
             var _auth;
             var _workouts;
+            var _workout;
             authenticate({email: node.user, password: node.password})
             .then((result) => {
                 _auth = result;
@@ -27,15 +28,15 @@ module.exports = function(RED) {
             .then((result) => {
                 _workouts = result;
                 msg.workouts = _workouts;
-                
+                return result
+            })
+            .then((result) => {return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[0].id})})
+            .then((result) => {
+                _workout = result;
+                msg.payload = _workout;
                 node.send(msg);
                 return result
             });
-            //.then((result) => {return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[0].id})})
-            //.then((result) => {
-            //    console.log(result)
-            //    return result
-            //});
         });
     }
 
