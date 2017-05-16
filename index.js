@@ -18,7 +18,7 @@ module.exports = function(RED) {
             authenticate({email: node.user, password: node.password})
             .then((result) => {
                 _auth = result;
-                msg.payload = _auth;
+                msg.auth = _auth;
                 return result;
             })
             .then((result) => {
@@ -26,7 +26,8 @@ module.exports = function(RED) {
             })
             .then((result) => {
                 _workouts = result;
-                msg.payload.workouts = _workouts;
+                msg.workouts = _workouts;
+                
                 node.send(msg);
                 return result
             });
