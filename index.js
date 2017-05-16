@@ -18,10 +18,10 @@ module.exports = function(RED) {
             var _workouts;
             var _workout;
 
-            const _catch((err) => {
+            const _catch = (err) => {
               msg.err = err;
               node.send(msg);
-            });
+            };
 
             authenticate({email: node.user, password: node.password})
             .then((result) => {
@@ -38,7 +38,7 @@ module.exports = function(RED) {
                 return result;
             })
             .then((result) => {
-                return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[node.index].id})
+                return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[node.index].id});
             })
             .then((result) => {
                 _workout = result;
