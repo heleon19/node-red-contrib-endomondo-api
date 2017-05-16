@@ -18,11 +18,6 @@ module.exports = function(RED) {
             var _workouts;
             var _workout;
 
-            const _catch = (err) => {
-              msg.err = err;
-              node.send(msg);
-            };
-
             msg.payload = undefined;
             msg.data = {};
 
@@ -45,7 +40,16 @@ module.exports = function(RED) {
             })
             .then((result) => {
                 _workout = result;
-                msg.payload = _workout;
+                msg.data.workout = _workout;
+
+                /* use format of official msg convention */
+                msg.payload.id = _workout.id;                             // The ID of the activity in the given fitness system/API
+                msg.payload.type = _workout.sport;                        // The type of the activity, example: run/cycle ride
+                msg.payload.duration = _workout.duration;                 // Duration of the activity in seconds
+                msg.payload.distance = _workout.distance;                 // Distance of activity in metres
+                msg.payload.calories = _workout.calories;                 // Calories burned during activity in kilocalories
+                msg.payload.starttime = Date.parse(_workout.start_time);  // JavaScript Date object representing the start time of the activity
+
                 node.send(msg);
                 return result;
             })
@@ -54,6 +58,8 @@ module.exports = function(RED) {
                 node.send(msg);
             });
         });
+
+
     }
 
     RED.nodes.registerType("Workouts", WorkoutsNode);
