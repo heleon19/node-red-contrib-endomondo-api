@@ -1,3 +1,8 @@
+const authenticate = require('endomondo-unofficial-api').authenticate;
+const workouts = require('endomondo-unofficial-api').workouts;
+const workoutGet = require('endomondo-unofficial-api').workout.get;
+const workoutSet = require('endomondo-unofficial-api').workout.set
+
 module.exports = function(RED) {
     function Workouts(config) {
         RED.nodes.createNode(this, config);
