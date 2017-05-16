@@ -23,10 +23,13 @@ module.exports = function(RED) {
               node.send(msg);
             };
 
+            msg.payload = undefined;
+            msg.data = {};
+
             authenticate({email: node.user, password: node.password})
             .then((result) => {
                 _auth = result;
-                msg.auth = _auth;
+                msg.data.auth = _auth;
                 return result;
             })
             .then((result) => {
@@ -34,7 +37,7 @@ module.exports = function(RED) {
             })
             .then((result) => {
                 _workouts = result;
-                msg.workouts = _workouts;
+                msg.data.workouts = _workouts;
                 return result;
             })
             .then((result) => {
@@ -46,7 +49,10 @@ module.exports = function(RED) {
                 node.send(msg);
                 return result;
             })
-            .catch((cause) => _catch(cause));
+            .catch((cause) => {
+                msg.data.err = cause;
+                node.send(msg);
+            });
         });
     }
 
