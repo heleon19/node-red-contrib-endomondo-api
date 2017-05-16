@@ -35,7 +35,7 @@ module.exports = function(RED) {
             .then((result) => {
                 _workouts = result;
                 msg.workouts = _workouts;
-                return result
+                return result;
             })
             .then((result) => {
                 return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[node.index].id})
@@ -44,7 +44,7 @@ module.exports = function(RED) {
                 _workout = result;
                 msg.payload = _workout;
                 node.send(msg);
-                return result
+                return result;
             });
         });
     }
