@@ -13,13 +13,28 @@ module.exports = function(RED) {
         var node = this;
         node.on('input', function(msg) {
             /* connect to endomondo */
-            authenticate({email: node.user, password: node.password}).then((auth) => {
-                msg.payload.auth = auth;
-                workouts({authToken: auth.authToken}).then((works) => {
-                  msg.payload.workouts = works;
-                  node.send(msg);
-                });
-            });
+            var _auth;
+            var _workouts;
+            authenticate({email: node.user, password: node.password})
+            .then((result) => {
+                _auth = result;
+                msg.payload.auth = _auth;
+                return result;
+            })
+            .then((result) => {
+                return workouts({authToken: _auth.authToken});
+            })
+            .then((result) => {
+                _workouts = result;
+                msg.payload.workouts = _workouts;
+                node.send(msg);
+                return result
+            })
+            //.then((result) => {return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[0].id})})
+            //.then((result) => {
+            //    console.log(result)
+            //    return result
+            //});
         });
     }
 
