@@ -14,8 +14,11 @@ module.exports = function(RED) {
         node.on('input', function(msg) {
             /* connect to endomondo */
             authenticate({email: node.user, password: node.password}).then((auth) => {
-                msg.payload = auth;
-                node.send(msg);
+                msg.payload.auth = auth;
+                workouts({authToken: auth.authToken}).then((works) => {
+                  msg.payload.workouts = works;
+                  node.send(msg);
+                });
             });
         });
     }
