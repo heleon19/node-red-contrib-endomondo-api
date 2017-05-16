@@ -10,6 +10,7 @@ module.exports = function(RED) {
         RED.nodes.createNode(this, config);
         this.user = config.user;
         this.password = config.password;
+        this.index = config.index;
         var node = this;
         node.on('input', function(msg) {
             /* connect to endomondo */
@@ -30,7 +31,9 @@ module.exports = function(RED) {
                 msg.workouts = _workouts;
                 return result
             })
-            .then((result) => {return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[0].id})})
+            .then((result) => {
+                return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[node.index].id})
+            })
             .then((result) => {
                 _workout = result;
                 msg.payload = _workout;

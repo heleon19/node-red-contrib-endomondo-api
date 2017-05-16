@@ -5,7 +5,8 @@
         defaults: {
             name: {value:""},
             user: {value:""},
-            password: {value:""}
+            password: {value:""},
+            index: {value:0, required:true, validate:RED.validators.number()}
         },
         inputs:1,
         outputs:1,
@@ -24,6 +25,10 @@
     <div class="form-row">
         <label for="node-input-password"><i class="icon-tag"></i> Password</label>
         <input type="password" id="node-input-password">
+    </div>
+    <div class="form-row">
+        <label for="node-input-index"><i class="icon-tag"></i> Index</label>
+        <input type="text" id="node-input-index">
     </div>
 
     <div class="form-row">
