@@ -49,7 +49,7 @@ module.exports = function(RED) {
                 msg.payload.duration = _workout.duration;                 // Duration of the activity in seconds
                 msg.payload.distance = _workout.distance;                 // Distance of activity in metres
                 msg.payload.calories = _workout.calories;                 // Calories burned during activity in kilocalories
-                msg.payload.starttime = Date.parse(_workout.start_time);  // JavaScript Date object representing the start time of the activity
+                msg.payload.starttime = new Date(_workout.start_time);  // JavaScript Date object representing the start time of the activity
 
                 node.send(msg);
                 return result;
