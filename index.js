@@ -18,7 +18,7 @@ module.exports = function(RED) {
             authenticate({email: node.user, password: node.password})
             .then((result) => {
                 _auth = result;
-                msg.payload.auth = _auth;
+                msg.payload = _auth;
                 return result;
             })
             .then((result) => {
@@ -29,7 +29,7 @@ module.exports = function(RED) {
                 msg.payload.workouts = _workouts;
                 node.send(msg);
                 return result
-            })
+            });
             //.then((result) => {return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[0].id})})
             //.then((result) => {
             //    console.log(result)
