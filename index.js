@@ -38,7 +38,7 @@ module.exports = function(RED) {
                 return result;
             })
             .then((result) => {
-                return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[node.index].id});
+                return workoutGet({authToken: _auth.authToken, workoutId: _workouts.data[node.index].id})
             })
             .then((result) => {
                 _workout = result;
