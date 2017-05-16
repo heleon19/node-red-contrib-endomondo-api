@@ -1,15 +1,17 @@
-const authenticate = require('endomondo-unofficial-api').authenticate;
-const workouts = require('endomondo-unofficial-api').workouts;
-const workoutGet = require('endomondo-unofficial-api').workout.get;
-const workoutSet = require('endomondo-unofficial-api').workout.set
+
 
 module.exports = function(RED) {
-    function Workouts(config) {
+    const authenticate = require('endomondo-unofficial-api').authenticate;
+    const workouts = require('endomondo-unofficial-api').workouts;
+    const workoutGet = require('endomondo-unofficial-api').workout.get;
+    const workoutSet = require('endomondo-unofficial-api').workout.set
+
+    function WorkoutsNode(config) {
         RED.nodes.createNode(this, config);
         this.user = config.user;
         this.password = config.password;
         var node = this;
-        node.on('input', function(msg) {
+        node.on('input', async(msg) => {
             /* connect to endomondo */
             const auth = await authenticate({email: node.user, password: node.password});
             //console.log(auth);
@@ -18,7 +20,7 @@ module.exports = function(RED) {
         });
     }
 
-    RED.nodes.registerType("Workouts", Workouts);
+    RED.nodes.registerType("Workouts", WorkoutsNode);
 }
 
 
